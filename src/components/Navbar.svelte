@@ -1,5 +1,5 @@
 <script>
-  import navicon from "../assets/harsu.jpeg"
+  import navicon from "../assets/harsu-nobg-crop.png"
 </script>
 
 <div id="nav">
