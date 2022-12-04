@@ -1,7 +1,13 @@
 <script lang="ts">
-  import removeIcon from "../assets/removeIcon.png"
+  import { slide } from "svelte/transition"
+	import {crossfade} from '../utils/crossfade';
+	const [send, receive] = crossfade;
 
-  export let name
+  import removeIcon from "../assets/removeIcon.png"
+  import { students } from "../utils/store"
+
+  export let name: string
+  export let key: number
 
   let hovered = false
   let divHiding = false
@@ -10,9 +16,7 @@
     hovered = true
   }
 
-  const onMouseLeave = (e) => {
-    const target = e.target as HTMLDivElement
-
+  const onMouseLeave = () => {
     divHiding = true
 
     setTimeout(() => {
@@ -20,16 +24,21 @@
       divHiding = false
     }, 200)
   }
+
+  const deleteItem = () => students.update(oldState => oldState.filter(e => e.id != key))
+  
 </script>
 
-<li on:mouseenter={onMouseEnter} on:mouseleave={onMouseLeave}>
-  <span>{name}</span>
-  {#if hovered}
-  <button class={divHiding ? "hide" : ""}>
-    <img src={removeIcon} alt="remove">
-  </button>
-  {/if}
-</li>
+<div in:receive={{key: key}} out:send={{key: key}}>
+  <li on:mouseenter={onMouseEnter} on:mouseleave={onMouseLeave} transition:slide|local>
+    <span>{name}</span>
+    {#if hovered}
+    <button on:click={deleteItem} class={divHiding ? "hide" : ""}>
+      <img src={removeIcon} alt="remove">
+    </button>
+    {/if}
+  </li>
+</div>
 
 <style>
   img {

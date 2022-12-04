@@ -8,6 +8,6 @@
 
 <style>
   .card {
-    @apply rounded-md bg-indigo-50 shadow-md p-4 m-4;
+    @apply rounded-md bg-indigo-50 shadow-md p-4 m-4 h-fit;
   }
 </style>

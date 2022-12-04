@@ -2,19 +2,22 @@
 
   import Card from "./Card.svelte"
   import { students } from "../utils/store";
+  import { StudentKey } from "../utils/keyScheduler"
 
   let input = ''
+  let index = 0
 
   const insertStudent = () => {
-    students.update(oldState => [...oldState, { name: input }])
+    students.update(oldState => [...oldState, { name: input, id: StudentKey.new(), index}])
+    input = ''
   }
 
 </script>
 
-<Card>
+<Card className="w-1/2">
   <h1 class="title">Inserisci nuovo studente</h1>
   <div class="form">
-    <input type="text" placeholder="Inserisci nome" class="input input-bordered input-primary w-1/3" bind:value={input}/>
+    <input type="text" placeholder="Inserisci nome" class="input input-bordered input-primary w-2/5" bind:value={input}/>
     <button class="btn btn-primary" on:click={insertStudent}>Inserisci</button>
   </div>
 </Card>

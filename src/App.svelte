@@ -8,27 +8,27 @@
 
 <Navbar />
 <div class="content">
-  <InputForm />
+  <div class="input">
+    <InputForm />
+    <SelectionForm />
+  </div>
   <div class="lists">
     <StudentList width="w-1/2"/>
-    <div class="col">
-      <ResultsList/>
-      <SelectionForm />
-    </div>
+    <ResultsList width="w-1/2"/>
   </div>
 </div>
 
 <style>
   .content {
-    @apply h-full;
+    @apply h-full flex flex-col px-56;
     padding-top: var(--navbar-height);
   }
 
-  .col {
-    @apply flex flex-col w-1/2;
+  .input {
+    @apply flex h-fit p-0;
   }
 
   .lists {
-    @apply w-full flex;
+    @apply w-full flex align-baseline;
   }
 </style>
