@@ -14,6 +14,8 @@
     <div class="overflow-hidden">
       {#each $students as student (student.id)}
         <StudentItem name={student.name} key={student.id}/>
+      {:else}
+        <p>No students left :o</p>
       {/each }
     </div>
   </List>

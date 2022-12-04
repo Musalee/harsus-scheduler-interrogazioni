@@ -6,15 +6,15 @@ export class Shuffle {
 
   static run() {
     this.interval = setInterval(() => {
-      // const randNum = Math.floor(Math.random() * this.originalArray.length)
       let element: Student
 
       students.update((oldState) => {
-        element = oldState.at(0)
-        return oldState.filter((e, index) => index != 0)
+        element = oldState.shift()
+        return oldState
       })
 
-      console.log(element)
+      if (!element) return
+
       element.id = StudentKey.new()
 
       students.update((oldState) => [...oldState, element])

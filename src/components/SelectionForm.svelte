@@ -1,26 +1,42 @@
 <script lang="ts">
   import { Shuffle } from "../utils/shuffle"
-  import { results, students } from "../utils/store"
+  import { results, shuffling, students } from "../utils/store"
   import Card from "./Card.svelte"
 
   let num = 1
 
   const selectStudents = () => {
+
+    if ($shuffling) return
     
+    shuffling.set(true)
+
     Shuffle.run()
 
     for (let i = 0; i < num; i++) {
-      setTimeout(() => {
-        const randomNum = Math.floor(Math.random() * num)
 
-        Shuffle.stop()        
+
+      setTimeout(() => {
+        Shuffle.stop()     
+
+        let randomNum: number
+
+        do {
+          randomNum = Math.floor(Math.random() * num)
+        } while (randomNum >= $students.length)
+        console.log($students.at(randomNum))
+
         results.update((oldState) => [...oldState, $students.at(randomNum)])
         students.update((oldState) => oldState.filter((e, index) => index != randomNum))
         Shuffle.run()
       }, (i+1)*1000)
     }
 
-    setTimeout(() => Shuffle.stop(), num*1300)
+    setTimeout(() => { 
+      Shuffle.stop()
+      shuffling.set(false) 
+    }, num*1300)
+
 
   }
 
@@ -30,7 +46,7 @@
   <h1 class="title">Inserisci numero studenti da estrarre</h1>
   <div class="form">
     <input type="number" id="name-input" min="0" bind:value={num} max="{$students.length}" placeholder="Inserisci numero" class="input input-bordered input-primary w-1/3" />
-    <button class="btn btn-primary" on:click={selectStudents}>let's go</button>
+    <button class={`btn btn-primary w-1/4 ${$shuffling ? "loading no-animation disabled text-center btn-square" : ""}`} on:click={selectStudents}>{$shuffling ? "" : "let's go"}</button>
   </div>
 </Card>
 
