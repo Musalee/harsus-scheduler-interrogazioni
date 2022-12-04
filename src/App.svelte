@@ -20,12 +20,12 @@
 
 <style>
   .content {
-    @apply h-full flex flex-col px-56;
+    @apply h-full flex flex-col px-56 bg-blue-100;
     padding-top: var(--navbar-height);
   }
 
   .input {
-    @apply flex h-fit p-0;
+    @apply flex h-fit p-0 bg-blue-100;
   }
 
   .lists {

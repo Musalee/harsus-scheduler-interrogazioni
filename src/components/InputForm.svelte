@@ -5,28 +5,56 @@
   import { StudentKey } from "../utils/keyScheduler"
 
   let input = ''
+  let textInputElement
   let index = 0
+  let inputValid = true
+  let debounceTimer
 
   const insertStudent = () => {
-    if ($shuffling || validateInput) return
+    if ($shuffling) return
+
+    validateInput()
+
+    if (!inputValid) return
+    
+    clearTimeout(debounceTimer)
 
     students.update(oldState => [...oldState, { name: input, id: StudentKey.new(), index: index++}])
     input = ''
   }
 
-  const validateInput = (): boolean => {
-    if (input.length == 0) return false
-    
-    return true
+  const validateInput = () => {
+    if (input.length == 0) {
+      inputValid = false
+      textInputElement.focus()
+      return
+    }
+
+    inputValid = true
   } 
+
+  const debounce = () => {
+		clearTimeout(debounceTimer);
+		debounceTimer = setTimeout(() => {
+			validateInput()
+		}, 300);
+	}
 
 </script>
 
 <Card className="w-1/2">
   <h1 class="title">Inserisci nuovo studente</h1>
   <div class="form">
-    <input type="text" on:keydown={(e) => e.key == "Enter" && insertStudent()} placeholder="Inserisci nome" class="input input-bordered input-primary w-2/5" bind:value={input}/>
-    <button class={`btn btn-primary w-1/4 ${$shuffling ? "loading no-animation disabled text-center" : ""}`} on:click={insertStudent}>Inserisci</button>
+    <input type="text" 
+           on:keyup={(e) => e.key == "Enter" ? insertStudent(): debounce()}
+           placeholder="Inserisci nome" 
+           class={`input input-bordered w-2/5 ${inputValid ? "input-primary" : "input-error invalid-student-input"}`}  
+           bind:value={input}
+           bind:this={textInputElement}
+    />
+    <button class={`btn btn-primary w-1/4 ${$shuffling ? "loading no-animation disabled text-center" : ""}`}
+            on:click={insertStudent}
+    >Inserisci</button>
   </div>
 </Card>
 
@@ -37,5 +65,32 @@
 
   .form {
     @apply flex justify-center gap-4;
+  }
+
+  input {
+    @apply text-black;
+  }
+
+  :global(.invalid-student-input) {
+    @apply input-error;
+    animation: wiggle 300ms linear 3;
+  }
+
+  @keyframes wiggle {
+    0% {
+      transform: translateX(0%)
+    }
+
+    25% {
+      transform: translateX(2px)
+    }
+
+    75% {
+      transform: translateX(-2px)
+    }
+
+    100% {
+      transform: translateX(0%)
+    }
   }
 </style>

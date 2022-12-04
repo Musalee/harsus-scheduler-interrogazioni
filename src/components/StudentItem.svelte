@@ -9,34 +9,16 @@
   export let name: string
   export let key: number
 
-  let hovered = false
-  let divHiding = false
-
-  const onMouseEnter = () => {
-    hovered = true
-  }
-
-  const onMouseLeave = () => {
-    divHiding = true
-
-    setTimeout(() => {
-      hovered = false
-      divHiding = false
-    }, 200)
-  }
-
   const deleteItem = () => students.update(oldState => oldState.filter(e => e.id != key))
   
 </script>
 
 <div in:receive={{key: key}} out:send={{key: key}}>
-  <li on:mouseenter={onMouseEnter} on:mouseleave={onMouseLeave} transition:slide|local>
+  <li transition:slide|local>
     <span>{name}</span>
-    {#if hovered}
-    <button on:click={deleteItem} class={divHiding ? "hide" : ""}>
+    <button on:click={deleteItem}>
       <img src={removeIcon} alt="remove">
     </button>
-    {/if}
   </li>
 </div>
 
@@ -50,35 +32,11 @@
   }
 
   button {
-    @apply opacity-0;
-    animation: slide-in .2s ease-in-out forwards;
+    transform: translateX(200%);
+    transition: transform .5s ease-in-out;
   }
 
-  .hide {
-    animation: slide-out .2s ease-in-out;
-  }
-  
-  @keyframes slide-in {
-    0% {
-      transform: translateX(200%);
-      @apply opacity-100;
-    }
-
-    100% {
-      transform: translateX(0%);
-      @apply opacity-100;
-    }
-  }
-
-  @keyframes slide-out {
-    0% {
-      transform: translateX(0%);
-      @apply opacity-100;
-    }
-
-    100% {
-      transform: translateX(200%);
-      @apply opacity-100;
-    }
+  li:hover button {
+    transform: translateX(0%);
   }
 </style>

@@ -13,7 +13,7 @@
   }
 
   #nav {
-    @apply absolute bg-blue-600 w-full flex items-center px-12 gap-6;
+    @apply absolute bg-indigo-500 w-full flex items-center px-12 gap-6;
     height: var(--navbar-height);
   }
 

@@ -17,6 +17,8 @@
         <li animate:flip in:receive={{key: result.id}} out:send={{key: result.id}}>
           {result.name}
         </li>
+    {:else}
+      <p>No results to be shown :P</p>
     {/each}
   </List>
 </Card>
