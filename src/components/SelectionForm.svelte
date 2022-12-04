@@ -40,6 +40,7 @@
     setTimeout(() => { 
       Shuffle.stop()
       shuffling.set(false) 
+      num = num > $students.length ? $students.length : num
     }, num*1300)
   }
 

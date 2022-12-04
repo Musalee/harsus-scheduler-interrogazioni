@@ -33,7 +33,7 @@
 
   button {
     transform: translateX(200%);
-    transition: transform .5s ease-in-out;
+    transition: transform .5s ease-in;
   }
 
   li:hover button {
