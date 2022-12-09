@@ -4,7 +4,6 @@
   import List from "./List.svelte"
   import StudentItem from "./StudentItem.svelte";
 
-
   export let width = ""
 </script>
 

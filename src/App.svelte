@@ -4,7 +4,12 @@
   import ResultsList from "./components/ResultsList.svelte"
   import SelectionForm from "./components/SelectionForm.svelte"
   import StudentList from "./components/StudentList.svelte"
+  import { loadFromStorage, registerUpdates } from "./utils/storage"
+
+  loadFromStorage()
+  registerUpdates()
 </script>
+
 
 <Navbar />
 <div class="content">

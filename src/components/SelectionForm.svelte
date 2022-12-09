@@ -21,6 +21,7 @@
     Shuffle.run()
 
     for (let i = 0; i < num; i++) {
+
       setTimeout(() => {
         Shuffle.stop()     
 
@@ -29,10 +30,10 @@
         do {
           randomNum = Math.floor(Math.random() * num)
         } while (randomNum >= $students.length)
-        console.log($students.at(randomNum))
 
         results.update((oldState) => [...oldState, $students.at(randomNum)])
         students.update((oldState) => oldState.filter((e, index) => index != randomNum))
+
         Shuffle.run()
       }, (i+1)*1000)
     }

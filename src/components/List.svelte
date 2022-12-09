@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let name
+  export let name: string
 </script>
 
 <h1 class="title">{name}</h1>

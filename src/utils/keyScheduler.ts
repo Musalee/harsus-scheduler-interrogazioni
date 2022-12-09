@@ -4,4 +4,8 @@ export class StudentKey {
   static new() {
     return this.key++
   }
+
+  static setCurrentKey(key: number) {
+    this.key = key
+  }
 }

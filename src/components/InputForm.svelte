@@ -5,7 +5,7 @@
   import { StudentKey } from "../utils/keyScheduler"
 
   let input = ''
-  let textInputElement
+  let textInputElement: HTMLInputElement
   let index = 0
   let inputValid = true
   let debounceTimer
@@ -46,7 +46,7 @@
   <h1 class="title">Inserisci nuovo studente</h1>
   <div class="form">
     <input type="text" 
-           on:keyup={(e) => e.key == "Enter" ? insertStudent(): debounce()}
+           on:keyup={(e) => e.key == "Enter" ? insertStudent() : debounce()}
            placeholder="Inserisci nome" 
            class={`input input-bordered w-2/5 ${inputValid ? "input-primary" : "input-error invalid-student-input"}`}  
            bind:value={input}
@@ -54,7 +54,9 @@
     />
     <button class={`btn btn-primary w-1/4 ${$shuffling ? "loading no-animation disabled text-center" : ""}`}
             on:click={insertStudent}
-    >Inserisci</button>
+    >
+      Inserisci
+    </button>
   </div>
 </Card>
 

@@ -1,11 +1,9 @@
 <script lang="ts">
   import { slide } from "svelte/transition"
-	import {crossfade} from '../utils/crossfade';
-	const [send, receive] = crossfade;
-
+  
   import removeIcon from "../assets/removeIcon.png"
   import { students } from "../utils/store"
-
+  
   export let name: string
   export let key: number
 
@@ -13,10 +11,10 @@
   
 </script>
 
-<div in:receive={{key: key}} out:send={{key: key}}>
+<div>
   <li transition:slide|local>
     <span>{name}</span>
-    <button on:click={deleteItem}>
+    <button tabindex="-1" on:click={deleteItem}>
       <img src={removeIcon} alt="remove">
     </button>
   </li>
