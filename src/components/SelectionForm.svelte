@@ -35,18 +35,18 @@
         students.update((oldState) => oldState.filter((e, index) => index != randomNum))
 
         Shuffle.run()
-      }, (i+1)*1000)
+      }, (i+1)*1500)
     }
 
     setTimeout(() => { 
       Shuffle.stop()
       shuffling.set(false) 
       num = num > $students.length ? $students.length : num
-    }, num*1300)
+    }, num*1750)
   }
 
   const validateInput = () => {
-    if (num <= 0 || num > $students.length) {
+    if (num < 0 || num > $students.length) {
       inputValid = false
       numInputElement.focus()
       return
@@ -64,7 +64,7 @@
 
 </script>
 
-<Card className="w-1/2">
+<Card className="md:w-1/2">
   <h1 class="title">Inserisci numero studenti da estrarre</h1>
   <div class="form">
     <input type="number" 
@@ -84,15 +84,19 @@
 
 <style>
   .title {
-    @apply text-xl mb-4 w-full text-center text-black;
+    @apply text-lg lg:text-xl mb-4 w-full text-center text-black;
   }
 
   .form {
-    @apply flex justify-center gap-4;
+    @apply flex flex-col lg:flex-row justify-center gap-2 lg:gap-4 px-8 lg:px-16;
   }
 
   input {
-    @apply text-black;
+    @apply text-black w-full lg:w-3/5 text-center;
+  }
+
+  button {
+    @apply md:text-sm xl:text-base w-full lg:w-2/5;
   }
 
   :global(.invalid-number-input) {

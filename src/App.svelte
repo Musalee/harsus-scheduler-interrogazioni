@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from "svelte"
   import InputForm from "./components/InputForm.svelte"
   import Navbar from "./components/Navbar.svelte"
   import ResultsList from "./components/ResultsList.svelte"
@@ -6,8 +7,10 @@
   import StudentList from "./components/StudentList.svelte"
   import { loadFromStorage, registerUpdates } from "./utils/storage"
 
-  loadFromStorage()
-  registerUpdates()
+  onMount(() => {
+    loadFromStorage()
+    registerUpdates()
+  })
 </script>
 
 
@@ -18,22 +21,29 @@
     <SelectionForm />
   </div>
   <div class="lists">
-    <StudentList width="w-1/2"/>
-    <ResultsList width="w-1/2"/>
+    <StudentList className="md:w-1/2"/>
+    <ResultsList className="md:w-1/2"/>
   </div>
 </div>
 
 <style>
-  .content {
-    @apply h-full flex flex-col px-56 bg-blue-100;
-    padding-top: var(--navbar-height);
+
+  :global(#app) {
+    @apply h-screen;
   }
+  .content {
+    @apply h-full flex flex-col lg:px-28 xl:px-56 bg-blue-100;
+    padding-top: var(--navbar-height);
+    min-width: 400px;
+  } 
 
   .input {
-    @apply flex h-fit p-0 bg-blue-100;
+    @apply flex flex-col w-full md:flex-row h-fit p-0 bg-inherit;
   }
 
   .lists {
-    @apply w-full flex align-baseline;
+    @apply flex flex-col md:flex-row w-full align-baseline;
   }
+
+  
 </style>

@@ -7,11 +7,11 @@
   import { results } from "../utils/store";
   import { slide } from 'svelte/transition'
 
-  export let width = ""
+  export let className = ""
 
 
 </script>
-<Card className={width}>
+<Card className={className}>
   <List name="Lista Risultati">
     {#each $results as result (result.id)}
         <li animate:flip transition:slide|local>

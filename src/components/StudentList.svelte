@@ -4,11 +4,11 @@
   import List from "./List.svelte"
   import StudentItem from "./StudentItem.svelte";
 
-  export let width = ""
+  export let className = ""
 </script>
 
 
-<Card className={width}>
+<Card className={className}>
   <List name="Lista Studenti">
     <div class="overflow-hidden">
       {#each $students as student (student.id)}
