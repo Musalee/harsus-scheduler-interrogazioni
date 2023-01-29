@@ -1,3 +1,3 @@
 # Harsus Scheduler Interrogazioni
 
-![Harsu](./public/assets/harsu.jpeg)
+![Harsu](https://github.com/Musalee/harsus-scheduler-interrogazioni/blob/main/public/harsu-nobg-crop.png)
